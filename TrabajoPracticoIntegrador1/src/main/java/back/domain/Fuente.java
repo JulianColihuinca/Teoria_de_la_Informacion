@@ -1,3 +1,5 @@
+package back.domain;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,19 +9,20 @@ public class Fuente {
     private ArrayList<Double> probabilidades = new ArrayList<Double>();
     private ArrayList<Double> informacionIndividual = new ArrayList<Double>();
     private ArrayList<Double> entropiaIndividual = new ArrayList<Double>();
+
     private int cantidadDeFuentes=0;
     private double entropia;
 
-
-    public Fuente(String direccion) {
-        this.setFuentes(direccion);
+    public String calcularEntropia(String nombreArchivo) {
+        setFuentes(nombreArchivo);
         this.calculaInformacionIndividual();
         this.calculaEntropiaIndividual();
         this.calculaEntropia();
+        return getResultado();
     }
 
-    public int getCantidadDeFuentes() {
-        return cantidadDeFuentes;
+    private String getResultado() {
+        return getInfoProbabilidades() + getInformacionIndividual() + getInfoEntropiaIndividual() + getInfoEntropia();
     }
 
     private void setFuentes(String direccion) { //"C:\\Lucho\\Programas Java\\TeoriaInfoG02E20\\fuentes.txt"
@@ -34,13 +37,13 @@ public class Fuente {
         }
     }
 
-    public void muestraProbabilidades() {
-        int i=0;
-        System.out.println("P(Si)");
+    public String getInfoProbabilidades() {
+        String infoProbabilidades = "P(Si)";
+        int i = 0;
         for (Double x: probabilidades) {
-            System.out.println("P(S"+ ++i +") = "+x);
+            infoProbabilidades += "\nP(S"+ ++i +") = " + x;
         }
-        System.out.println();
+        return infoProbabilidades + "\n\n";
     }
 
     private void calculaInformacionIndividual() {
@@ -49,13 +52,13 @@ public class Fuente {
         }
     }
 
-    public void muestraInformacionIndividual() {
+    public String getInformacionIndividual() {
         int i=0;
-        System.out.println("I(Si)");
+        String infoIndividual = "I(Si)";
         for (Double x: informacionIndividual) {
-            System.out.println("I(S"+ ++i +") = "+x);
+            infoIndividual += "\nI(S"+ ++i +") = "+x;
         }
-        System.out.println();
+        return infoIndividual + "\n\n";
     }
 
     private void calculaEntropiaIndividual() {
@@ -64,13 +67,13 @@ public class Fuente {
         }
     }
 
-    public void muestraEntropiaIndividual() {
+    public String getInfoEntropiaIndividual() {
         int i=0;
-        System.out.println("H(Si)");
+        String infoEntropia = "H(Si)";
         for (Double x: entropiaIndividual) {
-            System.out.println("H(S"+ ++i +") = "+x);
+            infoEntropia += "\nH(S"+ ++i +") = "+x;
         }
-        System.out.println();
+        return infoEntropia + "\n";
     }
 
     private void calculaEntropia() {
@@ -80,9 +83,8 @@ public class Fuente {
         }
     }
 
-    public void muestraEntropia() {
-        System.out.println("H(S) = "+this.entropia);
-        System.out.println();
+    public String getInfoEntropia() {
+        return "\nH(S) = "+this.entropia + "\n\n";
     }
 
 }
