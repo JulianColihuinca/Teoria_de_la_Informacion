@@ -10,4 +10,19 @@ public class CalculadoraCantInformacion {
         }
         return infoIndividuales;
     }
+
+    /* Nuevo metodo que creo que deberia ir en una nueva calculadora llamandose invoke, se calcula la matriz de informacion */
+    public double[][] calcula(double matrizProbabilidades[][],int dimension){
+        double matrizInformacion[][] = new double[dimension][dimension];
+
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (matrizProbabilidades[i][j]!=0)
+                    matrizInformacion[i][j] =Math.abs(-Math.log(matrizProbabilidades[i][j]) / Math.log(2));
+                else
+                    matrizInformacion[i][j]=0;
+            }
+        }
+        return matrizInformacion;
+    }
 }
