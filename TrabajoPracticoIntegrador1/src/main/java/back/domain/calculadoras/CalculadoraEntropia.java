@@ -8,7 +8,7 @@ public class CalculadoraEntropia {
     }
 
     public ArrayList<Double> calculaEntropiaIndividual(ArrayList<Double> probabilidades, ArrayList<Double> infoIndividual) {
-        ArrayList<Double> entropiaIndividual = new ArrayList<>();
+        ArrayList<Double> entropiaIndividual = new ArrayList<Double>();
         for (int i=0;i<probabilidades.size();i++) {
             entropiaIndividual.add(probabilidades.get(i) * infoIndividual.get(i));
         }

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class LectorArchivo {
     public ArrayList<Double> leer(String direccion) {
-        ArrayList<Double> resultado = new ArrayList<>();
+        ArrayList<Double> resultado = new ArrayList<Double>();
         try {
             Scanner input = new Scanner(new File(direccion));
             while (input.hasNextLine()) {
