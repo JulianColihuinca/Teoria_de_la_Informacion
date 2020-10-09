@@ -9,6 +9,10 @@ public interface IVentana {
 
     int getCantFuentes();
 
+    double[][] getMatriz();
+
+    double[] getVector();
+
     String getDireccion();
 
     void dibujaVector(int cant);

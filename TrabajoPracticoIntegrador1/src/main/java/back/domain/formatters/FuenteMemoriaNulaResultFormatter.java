@@ -3,8 +3,8 @@ package back.domain.formatters;
 import java.util.ArrayList;
 
 public class FuenteMemoriaNulaResultFormatter {
-    public String formatResultado(ArrayList<Double> probabilidades, ArrayList<Double> infoIndividual,
-                                  ArrayList<Double> entropiaIndividual, double entropia) {
+    public String format(ArrayList<Double> probabilidades, ArrayList<Double> infoIndividual,
+                         ArrayList<Double> entropiaIndividual, double entropia) {
         return getInfoProbabilidades(probabilidades) + getInformacionIndividual(infoIndividual) +
                 getInfoEntropiaIndividual(entropiaIndividual) + getInfoEntropia(entropia);
     }
