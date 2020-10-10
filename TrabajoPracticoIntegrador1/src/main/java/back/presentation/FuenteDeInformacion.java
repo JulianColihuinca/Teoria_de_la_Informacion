@@ -1,13 +1,36 @@
 package back.presentation;
 
 import back.actions.Actionable;
-import back.actions.GetResultadoPorArchivoFuenteMemoriaNulaAction;
+import back.actions.fuenteMarkov.GetEntropiaFuenteMarkov;
+import back.actions.fuenteMarkov.GetEntropiaPorArchivoFuenteMarkov;
+import back.actions.fuenteMemoriaNula.GetEntropiaFuenteMemoriaNula;
+import back.actions.fuenteMemoriaNula.GetEntropiaPorArchivoFuenteMemoriaNulaAction;
+
+import java.util.ArrayList;
 
 public class FuenteDeInformacion implements IFuenteDeInformacion {
 
     @Override
-    public String calcularEntropia(String nombreArchivo) {
-        Actionable action = new GetResultadoPorArchivoFuenteMemoriaNulaAction(nombreArchivo);
+    public String calcularEntropiaFuenteMemNula(String nombreArchivo) {
+        Actionable action = new GetEntropiaPorArchivoFuenteMemoriaNulaAction(nombreArchivo);
+        return action.execute();
+    }
+
+    @Override
+    public String calcularEntropiaFuenteMemNula(ArrayList<Double> probabilidades) {
+        Actionable action = new GetEntropiaFuenteMemoriaNula(probabilidades);
+        return action.execute();
+    }
+
+    @Override
+    public String calcularMatrizEntropiaFuenteMarkov(String nombreArchivo) {
+        Actionable action = new GetEntropiaPorArchivoFuenteMarkov(nombreArchivo);
+        return action.execute();
+    }
+
+    @Override
+    public String calcularMatrizEntropiaFuenteMarkov(double[][] matrizProbabilidades) {
+        Actionable action = new GetEntropiaFuenteMarkov(matrizProbabilidades);
         return action.execute();
     }
 }

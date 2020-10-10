@@ -33,7 +33,7 @@ public class Controlador implements ActionListener {
             }
         }
         else if (commando.equalsIgnoreCase("VER RESULTADOS")) {
-            String resultado = fuenteDeInformacion.calcularEntropia(ventana.getDireccion());
+            String resultado = fuenteDeInformacion.calcularEntropiaFuenteMemNula(ventana.getDireccion());
             this.ventana.setAreaInformacion(resultado);
         }
 
