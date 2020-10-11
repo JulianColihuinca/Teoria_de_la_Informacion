@@ -13,7 +13,7 @@ public class LectorArchivo {
         try {
             Scanner input = new Scanner(new File(direccion));
             while (input.hasNextLine()) {
-                resultado.add(input.nextDouble());
+                resultado.add(numero(input.nextLine()));
             }
         } catch (FileNotFoundException e) {
             System.out.println("No se pudo leer el archivo.");
@@ -24,14 +24,14 @@ public class LectorArchivo {
     public double[][] leerMatriz(String direccion) {
         double[][] resultado = new double[0][];
         try {
-            Scanner sc = new Scanner(new BufferedReader(new FileReader("sample.txt")));
+            Scanner sc = new Scanner(new BufferedReader(new FileReader(direccion)));
             int cantFilas = Integer.parseInt(sc.nextLine());
             resultado = new double[cantFilas][cantFilas];
             while(sc.hasNextLine()) {
                 for (int i=0; i<resultado.length; i++) {
                     String[] line = sc.nextLine().trim().split(" ");
                     for (int j=0; j<line.length; j++) {
-                        resultado[i][j] = Double.parseDouble(line[j]);
+                        resultado[i][j] = numero(line[j]);
                     }
                 }
             }
@@ -60,4 +60,26 @@ public class LectorArchivo {
         }
         return resultado;*/
     }
+    
+    /**
+     * Esta funcion calcula el numero segun la cadena.
+     */
+    
+    private double numero(String numero) {
+    	double numeroFinal;	
+    	try {
+	    	if (numero.contains("/")) {
+	    		Double numerador= Double.parseDouble(numero.substring(0, numero.indexOf('/')));
+	    		Double denominador= Double.parseDouble(numero.substring(numero.indexOf('/')+1,numero.length()));
+	    		numeroFinal= numerador/denominador;
+	    	}
+	    	else 
+	    			numeroFinal= Double.parseDouble(numero);
+    	}
+    	catch(NumberFormatException e) {
+			return 0;
+		}	
+	    return numeroFinal;
+    }
+    
 }

@@ -12,6 +12,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Choice;
@@ -46,6 +48,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1075, 561);
         this.setMinimumSize(new Dimension(1075,560));
+        this.setTitle("TP Integrador 1");
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -177,6 +180,14 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         this.confirmarButton.addActionListener(actionlistener);
         this.actionlistener = actionlistener;
     }
+    
+    /**
+     * Esta funcion, devuelve true si los datos se leen por archivo sino false.
+     */
+    
+    public boolean porArchivo() {
+    	return this.archivoSeleccion.isSelected();
+    }
 
     /**
      * Este metodo setea el area de informacion, donde se veran los resultados.
@@ -262,19 +273,40 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         double[][] matriz= new double[this.matrizTextField.length][this.matrizTextField.length];
         for (int i=0;i<this.matrizTextField.length;i++)
             for (int j=0;j<this.matrizTextField.length;j++)
-                matriz[i][j]= Double.parseDouble(this.matrizTextField[i][j].getText());
+                matriz[i][j]= numero(this.matrizTextField[i][j].getText());
         return matriz;
     }
 
     /**
-     * Esta funcion devuelve el vector en formato double ingresada por teclado.
+     * Esta funcion devuelve el arraylist en formato double ingresada por teclado.
      */
 
-    public double[] getVector() {
-        double[] vector= new double[this.vTextField.length];
+    public ArrayList<Double> getArray() {
+        ArrayList<Double> array= new ArrayList<Double>();
         for (int i=0;i<this.vTextField.length;i++)
-            vector[i]= Double.parseDouble(this.vTextField[i].getText());
-        return vector;
+            array.add( numero(this.vTextField[i].getText()));
+        return array;
+    }
+    
+    /**
+     * Esta funcion calcula el numero segun la cadena.
+     */
+    
+    private double numero(String numero) {
+    	double numeroFinal;	
+    	try {
+	    	if (numero.contains("/")) {
+	    		Double numerador= Double.parseDouble(numero.substring(0, numero.indexOf('/')));
+	    		Double denominador= Double.parseDouble(numero.substring(numero.indexOf('/')+1,numero.length()));
+	    		numeroFinal= numerador/denominador;
+	    	}
+	    	else 
+	    			numeroFinal= Double.parseDouble(numero);
+    	}
+    	catch(NumberFormatException e) {
+			return 0;
+		}	
+	    return numeroFinal;
     }
 
 
