@@ -1,6 +1,7 @@
 package front.views;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public interface IVentana {
     void abrir();
@@ -11,7 +12,7 @@ public interface IVentana {
 
     double[][] getMatriz();
 
-    double[] getVector();
+    ArrayList<Double> getArray();
 
     String getDireccion();
 
@@ -22,4 +23,6 @@ public interface IVentana {
     void setAreaInformacion(String ver_resultados);
 
     void setActionlistener(ActionListener controlador);
+    
+    boolean porArchivo();
 }
