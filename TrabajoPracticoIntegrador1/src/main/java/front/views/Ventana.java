@@ -46,8 +46,8 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
 
     public Ventana() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 1075, 561);
-        this.setMinimumSize(new Dimension(1075,560));
+        setBounds(100, 100, 1200, 600);
+        this.setMinimumSize(new Dimension(1200,600));
         this.setTitle("TP Integrador 1");
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
