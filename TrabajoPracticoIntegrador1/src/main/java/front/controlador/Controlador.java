@@ -6,6 +6,7 @@ import front.views.IVentana;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Controlador implements ActionListener {
 
@@ -25,6 +26,8 @@ public class Controlador implements ActionListener {
                 this.ventana.dibujaVector(this.ventana.getCantFuentes());
             else if (this.ventana.getFuenteSeleccionada().equalsIgnoreCase("Fuente de Markov")) 
                 this.ventana.dibujaMatriz(this.ventana.getCantFuentes());
+            else if (this.ventana.getFuenteSeleccionada().equalsIgnoreCase("Codigo con Probabilidades"))
+            	 this.ventana.dibujaCodigo(this.ventana.getCantFuentes());
             
         }
         else if (commando.equalsIgnoreCase("VER RESULTADOS")) {
@@ -36,6 +39,14 @@ public class Controlador implements ActionListener {
             	 this.ventana.setAreaInformacion(this.fuenteDeInformacion.calcularEntropiaFuenteMemNula(this.ventana.getArray()));
             else if (!this.ventana.porArchivo() && this.ventana.getFuenteSeleccionada().equals("Fuente de Markov"))
             	 this.ventana.setAreaInformacion(this.fuenteDeInformacion.calcularMatrizEntropiaFuenteMarkov(this.ventana.getMatriz()));
+            else if (this.ventana.porArchivo() && this.ventana.getFuenteSeleccionada().equalsIgnoreCase("Codigo con Probabilidades") ) {
+            
+            }
+            else if (!this.ventana.porArchivo() && this.ventana.getFuenteSeleccionada().equalsIgnoreCase("Codigo con Probabilidades") ) {
+            	ArrayList<String> codigo= this.ventana.getCodigo();
+            	ArrayList<Double> probabilidades= this.ventana.getProbabilidades();
+            	
+            }
         }
     }
 

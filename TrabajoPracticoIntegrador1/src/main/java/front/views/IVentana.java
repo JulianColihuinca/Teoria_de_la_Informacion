@@ -18,11 +18,17 @@ public interface IVentana {
 
     void dibujaVector(int cant);
 
-    void dibujaMatriz(int cantFuentes);
+    void dibujaMatriz(int cant);
+    
+    void dibujaCodigo(int cant);
 
     void setAreaInformacion(String ver_resultados);
 
     void setActionlistener(ActionListener controlador);
     
     boolean porArchivo();
+    
+   ArrayList<Double> getProbabilidades();
+   
+   ArrayList<String> getCodigo();
 }
