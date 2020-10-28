@@ -29,19 +29,21 @@ import javax.swing.ButtonGroup;
 public class Ventana extends JFrame implements IVentana, KeyListener, MouseListener  {
 
     private JPanel contentPane;
-    private JTextField[][] matrizTextField;
-    private JTextField[] vTextField;
-    private JTextField direccionTextField;
-    private JTextField fuentesTextField;
+    private JTextField[][] matrizTextField; // Usado para Fuente de Markov
+    private JTextField[] vTextField; // Usado para Fuente de memoria nula
+    private JTextField direccionTextField; // Direccion del archivo de texto
+    private JTextField fuentesTextField; // Cantidad de fuentes.
+    private JTextField[] codigoTextField; // Usado para Codigo con probabilidad
+    private JTextField[] probabilidadTextField; // Usado para codigocon probabilidad.
     private final ButtonGroup buttonGroup = new ButtonGroup();
-    private JPanel panelC3 ;
+    private JPanel panelC3 ; // Lugar donde se dibuja los TextField para ingresar datos por teclado
     private ActionListener actionlistener;
-    private JTextArea areaInformacion;
-    private Choice fuenteEleccion;
-    private JRadioButton tecladoSeleccion;
-    private JRadioButton archivoSeleccion ;
-    private JButton confirmarButton ;
-    private JButton resultadoBoton ;
+    private JTextArea areaInformacion; // Area de texto donde se muestran los resultados.
+    private Choice fuenteEleccion; // Se elige la opcion
+    private JRadioButton tecladoSeleccion; // Eleccion por teclado
+    private JRadioButton archivoSeleccion ; // Eleccion por archivo
+    private JButton confirmarButton ; // Boton para confirmar la cantidad de fuentes
+    private JButton resultadoBoton ; // Boton para ver resultados con los datos.
 
 
     public Ventana() {
@@ -161,12 +163,14 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         this.tecladoSeleccion.addMouseListener(this);
         this.fuenteEleccion.add("Fuente con memoria nula");
         this.fuenteEleccion.add("Fuente de Markov");
+        this.fuenteEleccion.add("Codigo con Probabilidades");
         this.direccionTextField.addKeyListener(this);
         this.fuentesTextField.addKeyListener(this);
         this.confirmarButton.setActionCommand("INGRESO FUENTE");
         this.resultadoBoton.setActionCommand("VER RESULTADOS");
     }
-
+    
+    @Override
     public void abrir() {
         setVisible(true);
     }
@@ -174,17 +178,17 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     /**
      * Setea el controlador y los asocia con los botones.
      */
-
-    public void setActionlistener(ActionListener actionlistener) {
-        this.resultadoBoton.addActionListener(actionlistener);
-        this.confirmarButton.addActionListener(actionlistener);
-        this.actionlistener = actionlistener;
+    @Override
+    public void setActionlistener(ActionListener controlador) {
+        this.resultadoBoton.addActionListener(controlador);
+        this.confirmarButton.addActionListener(controlador);
+        this.actionlistener = controlador;
     }
     
     /**
      * Esta funcion, devuelve true si los datos se leen por archivo sino false.
      */
-    
+    @Override
     public boolean porArchivo() {
     	return this.archivoSeleccion.isSelected();
     }
@@ -192,15 +196,15 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     /**
      * Este metodo setea el area de informacion, donde se veran los resultados.
      */
-
-    public void setAreaInformacion(String text) {
-        this.areaInformacion.setText(text);
+    @Override
+    public void setAreaInformacion(String ver_resultados) {
+        this.areaInformacion.setText(ver_resultados);
     }
 
     /**
      * Esta funcion devuelve la fuente seleccionada.
      */
-
+    @Override
     public String getFuenteSeleccionada() {
         return this.fuenteEleccion.getSelectedItem();
     }
@@ -208,7 +212,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     /**
      * Este metodo dibuja la matriz para ingresar por teclado.
      */
-
+    @Override
     public void dibujaMatriz(int cant) {
         this.panelC3.removeAll();
         this.setSize(new Dimension(1075,560));
@@ -232,7 +236,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     /**
      * Este metodo dibuja el vector para ingresar por teclado.
      */
-
+    @Override
     public void dibujaVector(int cant) {
         this.panelC3.removeAll();
         this.setSize(new Dimension(1075,560));
@@ -251,16 +255,71 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         this.setSize(new Dimension(1200,700));
         this.repaint();
     }
+    
+    /**
+     * Este metodo dibuja una seccion para ingresar codigo y otra con probabilidades
+     */
+    @Override
+    public void dibujaCodigo(int cant) {
+    	this.panelC3.removeAll();
+    	this.setSize(new Dimension(1075,560));
+    	this.panelC3.setLayout(new GridLayout(cant,2));
+    	this.codigoTextField= new JTextField[cant];
+    	this.probabilidadTextField= new JTextField[cant];
+    	for (int i=0;i<cant;i++) {
+    		JPanel panel1= new JPanel();
+    		panel1.setLayout(new FlowLayout());
+    		panel1.add(new JLabel("C" + (i+1) + ":"));
+    		JPanel panel2= new JPanel();
+    		panel2.setLayout(new FlowLayout());
+    		panel2.add(new JLabel("P" + (i+1) + ":"));
+    		this.codigoTextField[i]= new JTextField();
+    		this.probabilidadTextField[i]=new JTextField();
+    		this.codigoTextField[i].setColumns(10);
+    		this.probabilidadTextField[i].setColumns(7);
+    		this.codigoTextField[i].addKeyListener(this);
+    	    this.probabilidadTextField[i].addKeyListener(this);
+    	    panel1.add(this.codigoTextField[i]);
+    	    panel2.add(this.probabilidadTextField[i]);
+    	    panelC3.add(panel1);
+    	    panelC3.add(panel2);
+    	}
+    	this.setSize(new Dimension(1200,700));
+        this.repaint();
+    }
+    
+    /**
+     * Funcion que devuelve un arrayList de String con los codigos ingresados
+     */
+    @Override
+    public ArrayList<String> getCodigo(){
+    	ArrayList<String> codigos= new ArrayList<String>();
+    	for (int i=0;i<this.codigoTextField.length;i++) 
+    		codigos.add(this.codigoTextField[i].getText());
+    	return codigos;
+    }
+    
+    /**
+     * Funcion que devuelve un arrayList de Double que devuelve las probabilidades ingresadas.(Vinculado con getCodigo)
+     */
+    @Override
+    public ArrayList<Double> getProbabilidades(){
+    	ArrayList<Double> probabilidades= new ArrayList<Double>();
+    	for (int i=0;i<this.probabilidadTextField.length;i++) 
+    		probabilidades.add(this.numero(this.probabilidadTextField[i].getText()));
+    	return probabilidades;
+    }
+    
 
     /**
      * Esta funcion devuelve la direccion del archivo.
      */
-
+    @Override
     public String getDireccion() {
         return this.direccionTextField.getText();
     }
 
-
+    @Override
     public int getCantFuentes() {
         return Integer.parseInt(this.fuentesTextField.getText());
     }
@@ -268,7 +327,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     /**
      * Esta funcion devuelve la matriz en formato double ingresada por teclado.
      */
-
+    @Override
     public double[][] getMatriz(){
         double[][] matriz= new double[this.matrizTextField.length][this.matrizTextField.length];
         for (int i=0;i<this.matrizTextField.length;i++)
@@ -280,7 +339,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     /**
      * Esta funcion devuelve el arraylist en formato double ingresada por teclado.
      */
-
+    @Override
     public ArrayList<Double> getArray() {
         ArrayList<Double> array= new ArrayList<Double>();
         for (int i=0;i<this.vTextField.length;i++)
@@ -358,6 +417,13 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
                         condicion=  this.matrizTextField[i][j].getText()!=null && !this.matrizTextField[i][j].getText().equalsIgnoreCase("");
             }
             this.resultadoBoton.setEnabled(condicion);
+        }
+        else if (this.probabilidadTextField!=null && this.codigoTextField!=null) {
+        	condicion=true;
+        	for (int i=0;i<this.codigoTextField.length && condicion;i++)
+        		condicion= this.codigoTextField[i].getText()!=null && !this.codigoTextField[i].getText().equalsIgnoreCase("")
+        		 && this.probabilidadTextField[i].getText()!=null && !this.probabilidadTextField[i].getText().equalsIgnoreCase("");
+        	this.resultadoBoton.setEnabled(condicion);
         }
 
 
