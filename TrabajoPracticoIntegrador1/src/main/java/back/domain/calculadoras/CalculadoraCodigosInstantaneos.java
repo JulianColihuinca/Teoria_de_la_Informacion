@@ -1,25 +1,22 @@
 package back.domain.calculadoras;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 
 public class CalculadoraCodigosInstantaneos {
-	
-	//Si se puede, mejorar el código
+
 	//Metodo que genera un codigo instantaneo a partir de probabilidades
 	public ArrayList<String> invoke(ArrayList<Double> probabilidades) {
 		ArrayList<Double> listaAux = new ArrayList<Double>();
 		ArrayList<String> codAux = new ArrayList<String>();
 		ArrayList<String> codigos = new ArrayList<String>();
 
-		for (Double x : probabilidades) {
-			listaAux.add(x);
-		}
-		Collections.sort(listaAux);
-		Collections.reverse(listaAux);
+		listaAux.addAll(probabilidades);
+		listaAux.sort(Comparator.reverseOrder());
 
 		String codigo = "0";
-		for (int i = 0; i < probabilidades.size(); i++) {
+
+		for (Double probabilidad : probabilidades) {
 			codAux.add(codigo);
 			codigo = "1" + codigo;
 		}

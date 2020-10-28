@@ -6,7 +6,6 @@ import front.views.IVentana;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Controlador implements ActionListener {
 
@@ -23,11 +22,11 @@ public class Controlador implements ActionListener {
         String commando= arg0.getActionCommand();
         if (commando.equalsIgnoreCase("INGRESO FUENTE")) {
             if (this.ventana.getFuenteSeleccionada().equalsIgnoreCase("Fuente con memoria nula")) 
-                this.ventana.dibujaVector(this.ventana.getCantFuentes());
+                this.ventana.dibujaVector(this.ventana.getCantSimbolos());
             else if (this.ventana.getFuenteSeleccionada().equalsIgnoreCase("Fuente de Markov")) 
-                this.ventana.dibujaMatriz(this.ventana.getCantFuentes());
+                this.ventana.dibujaMatriz(this.ventana.getCantSimbolos());
             else if (this.ventana.getFuenteSeleccionada().equalsIgnoreCase("Codigo con Probabilidades"))
-            	 this.ventana.dibujaVector(this.ventana.getCantFuentes());
+            	 this.ventana.dibujaVector(this.ventana.getCantSimbolos());
             
         }
         else if (commando.equalsIgnoreCase("VER RESULTADOS")) {

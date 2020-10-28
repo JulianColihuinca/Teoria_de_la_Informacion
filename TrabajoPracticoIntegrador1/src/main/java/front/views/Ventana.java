@@ -32,7 +32,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     private JTextField[][] matrizTextField; // Usado para Fuente de Markov
     private JTextField[] vTextField; // Usado para Fuente de memoria nula
     private JTextField direccionTextField; // Direccion del archivo de texto
-    private JTextField fuentesTextField; // Cantidad de fuentes.
+    private JTextField simbolosTextField; // Cantidad de fuentes.
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JPanel panelC3 ; // Lugar donde se dibuja los TextField para ingresar datos por teclado
     private ActionListener actionlistener;
@@ -135,13 +135,13 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         JPanel panel_9 = new JPanel();
         panel_4.add(panel_9);
 
-        JLabel lblNewLabel = new JLabel("Fuentes:");
+        JLabel lblNewLabel = new JLabel("Simbolos:");
         panel_9.add(lblNewLabel);
 
-        fuentesTextField = new JTextField();
-        fuentesTextField.setEnabled(false);
-        panel_9.add(fuentesTextField);
-        fuentesTextField.setColumns(4);
+        simbolosTextField = new JTextField();
+        simbolosTextField.setEnabled(false);
+        panel_9.add(simbolosTextField);
+        simbolosTextField.setColumns(4);
 
         confirmarButton = new JButton("Ok!");
         confirmarButton.setEnabled(false);
@@ -163,7 +163,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         this.fuenteEleccion.add("Fuente de Markov");
         this.fuenteEleccion.add("Codigo con Probabilidades");
         this.direccionTextField.addKeyListener(this);
-        this.fuentesTextField.addKeyListener(this);
+        this.simbolosTextField.addKeyListener(this);
         this.confirmarButton.setActionCommand("INGRESO FUENTE");
         this.resultadoBoton.setActionCommand("VER RESULTADOS");
     }
@@ -265,8 +265,8 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     }
 
     @Override
-    public int getCantFuentes() {
-        return Integer.parseInt(this.fuentesTextField.getText());
+    public int getCantSimbolos() {
+        return Integer.parseInt(this.simbolosTextField.getText());
     }
 
     /**
@@ -318,12 +318,12 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     public void mouseClicked(MouseEvent arg0) {
         if (arg0.getSource()== this.archivoSeleccion) {
             this.direccionTextField.setEnabled(this.archivoSeleccion.isSelected());
-            this.fuentesTextField.setEnabled(this.tecladoSeleccion.isSelected());
+            this.simbolosTextField.setEnabled(this.tecladoSeleccion.isSelected());
             this.confirmarButton.setEnabled(this.tecladoSeleccion.isSelected());
         }
         else if (arg0.getSource()==this.tecladoSeleccion) {
             this.direccionTextField.setEnabled(this.archivoSeleccion.isSelected());
-            this.fuentesTextField.setEnabled(this.tecladoSeleccion.isSelected());
+            this.simbolosTextField.setEnabled(this.tecladoSeleccion.isSelected());
             this.confirmarButton.setEnabled(this.tecladoSeleccion.isSelected());
         }
     }
@@ -342,8 +342,8 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     @Override
     public void keyReleased(KeyEvent arg0) {
         boolean condicion;
-        if (arg0.getSource()==this.fuentesTextField) {
-            condicion=this.fuentesTextField.getText()!=null && !this.fuentesTextField.getText().equalsIgnoreCase("") ;
+        if (arg0.getSource()==this.simbolosTextField) {
+            condicion=this.simbolosTextField.getText()!=null && !this.simbolosTextField.getText().equalsIgnoreCase("") ;
             this.confirmarButton.setEnabled(condicion);
         }
         else if (arg0.getSource()==this.direccionTextField) {

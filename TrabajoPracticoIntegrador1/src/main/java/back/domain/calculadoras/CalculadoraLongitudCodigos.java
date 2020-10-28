@@ -1,16 +1,13 @@
 package back.domain.calculadoras;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class CalculadoraLongitudCodigos {
 
 	//Metodo que calcula longitudes individuales
 	public ArrayList<Integer> invoke(ArrayList<String> codigos) {
-		ArrayList<Integer> longitudes = new ArrayList<Integer>();
-		for (int i=0; i<codigos.size();i++) {
-			longitudes.add(codigos.get(i).length());
-		}
-		return longitudes;
+		return new ArrayList<>(codigos.stream().map(codigo -> codigo.length()).collect(Collectors.toList()));
 	}
 	
 	//Metodo que calcula longitud media

@@ -39,26 +39,6 @@ public class LectorArchivo {
             e.printStackTrace();
         }
         return resultado;
-
-        /*double [][] resultado = new double[0][];
-        try {
-            Scanner sc = new Scanner(new File(direccion));
-            int cantFilas = sc.nextInt();
-            resultado = new double[cantFilas][cantFilas];
-            int filaActual = 0;
-            int columnaActual = 0;
-            while (sc.hasNext()) {
-                resultado[filaActual][columnaActual++] = sc.nextDouble();
-                if (columnaActual >= 3) {
-                    columnaActual = 0;
-                    filaActual++;
-                }
-            }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return resultado;*/
     }
     
     /**

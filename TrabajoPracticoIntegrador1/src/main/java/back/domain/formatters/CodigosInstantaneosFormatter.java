@@ -25,7 +25,7 @@ public class CodigosInstantaneosFormatter {
 		int i = 0;
 		String infoIndividual = "Informacion I(Si)";
 		for (Double x : informacionesIndividuales) {
-			infoIndividual += "\nI(S" + ++i + ") real = " + x + " binits | I(S" + i + ") = " + Math.ceil(x) + " binits";
+			infoIndividual += "\nI(S" + ++i + ") real = " + x + " binits\nI(S" + i + ") = " + Math.ceil(x) + " binits";
 		}
 		return infoIndividual + "\n\n";
 	}
@@ -34,13 +34,13 @@ public class CodigosInstantaneosFormatter {
 		int i = 0;
 		String infoEntropia = "Entropias H(Si)";
 		for (Double x : entropiaIndividual) {
-			infoEntropia += "\nH(S" + ++i + ") = " + x + "binits/simbolo";
+			infoEntropia += "\nH(S" + ++i + ") = " + x + " [binits/simbolo]";
 		}
 		return infoEntropia + "\n";
 	}
 
 	private String getInfoEntropia(double entropia) {
-		return "\nEntropia H(S) = " + entropia + " binits/simbolo\n\n";
+		return "\nEntropia H(S) = " + entropia + " [binits/simbolo]\n\n";
 	}
 
 	private String getInfoLongitudes(ArrayList<Integer> longitudes, double longitudMedia) {
@@ -49,7 +49,7 @@ public class CodigosInstantaneosFormatter {
 		for (Integer x : longitudes) {
 			infoLongitudes += "\nl(S" + ++i + ") = " + x;
 		}
-		infoLongitudes += "\n Longitud Media: " + longitudMedia;
+		infoLongitudes += "\nLongitud Media: " + longitudMedia;
 		return infoLongitudes + "\n";
 	}
 	

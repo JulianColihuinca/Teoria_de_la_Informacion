@@ -8,7 +8,7 @@ public interface IVentana {
 
     String getFuenteSeleccionada();
 
-    int getCantFuentes();
+    int getCantSimbolos();
 
     double[][] getMatriz();
 
