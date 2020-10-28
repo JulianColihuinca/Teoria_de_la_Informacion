@@ -19,8 +19,6 @@ public interface IVentana {
     void dibujaVector(int cant);
 
     void dibujaMatriz(int cant);
-    
-    void dibujaCodigo(int cant);
 
     void setAreaInformacion(String ver_resultados);
 
@@ -28,7 +26,5 @@ public interface IVentana {
     
     boolean porArchivo();
     
-   ArrayList<Double> getProbabilidades();
    
-   ArrayList<String> getCodigo();
 }

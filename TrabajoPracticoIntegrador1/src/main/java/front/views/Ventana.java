@@ -33,8 +33,6 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     private JTextField[] vTextField; // Usado para Fuente de memoria nula
     private JTextField direccionTextField; // Direccion del archivo de texto
     private JTextField fuentesTextField; // Cantidad de fuentes.
-    private JTextField[] codigoTextField; // Usado para Codigo con probabilidad
-    private JTextField[] probabilidadTextField; // Usado para codigocon probabilidad.
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JPanel panelC3 ; // Lugar donde se dibuja los TextField para ingresar datos por teclado
     private ActionListener actionlistener;
@@ -222,7 +220,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
             for (int j=0;j<cant;j++) {
                 JPanel panel= new JPanel();
                 panel.setLayout(new FlowLayout());
-                panel.add(new JLabel("M" + (i+1) + (j+1) + ":"));
+                panel.add(new JLabel("P" + (i+1) + (j+1) + ":"));
                 this.matrizTextField[i][j]= new JTextField();
                 this.matrizTextField[i][j].setColumns(7);
                 this.matrizTextField[i][j].addKeyListener(this);
@@ -245,7 +243,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         for (int i=0;i<cant;i++) {
             JPanel panel= new JPanel();
             panel.setLayout(new FlowLayout());
-            panel.add(new JLabel("M" + (i+1) + ":"));
+            panel.add(new JLabel("P" + (i+1) + ":"));
             this.vTextField[i]= new JTextField();
             this.vTextField[i].setColumns(7);
             this.vTextField[i].addKeyListener(this);
@@ -256,60 +254,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         this.repaint();
     }
     
-    /**
-     * Este metodo dibuja una seccion para ingresar codigo y otra con probabilidades
-     */
-    @Override
-    public void dibujaCodigo(int cant) {
-    	this.panelC3.removeAll();
-    	this.setSize(new Dimension(1075,560));
-    	this.panelC3.setLayout(new GridLayout(cant,2));
-    	this.codigoTextField= new JTextField[cant];
-    	this.probabilidadTextField= new JTextField[cant];
-    	for (int i=0;i<cant;i++) {
-    		JPanel panel1= new JPanel();
-    		panel1.setLayout(new FlowLayout());
-    		panel1.add(new JLabel("C" + (i+1) + ":"));
-    		JPanel panel2= new JPanel();
-    		panel2.setLayout(new FlowLayout());
-    		panel2.add(new JLabel("P" + (i+1) + ":"));
-    		this.codigoTextField[i]= new JTextField();
-    		this.probabilidadTextField[i]=new JTextField();
-    		this.codigoTextField[i].setColumns(10);
-    		this.probabilidadTextField[i].setColumns(7);
-    		this.codigoTextField[i].addKeyListener(this);
-    	    this.probabilidadTextField[i].addKeyListener(this);
-    	    panel1.add(this.codigoTextField[i]);
-    	    panel2.add(this.probabilidadTextField[i]);
-    	    panelC3.add(panel1);
-    	    panelC3.add(panel2);
-    	}
-    	this.setSize(new Dimension(1200,700));
-        this.repaint();
-    }
-    
-    /**
-     * Funcion que devuelve un arrayList de String con los codigos ingresados
-     */
-    @Override
-    public ArrayList<String> getCodigo(){
-    	ArrayList<String> codigos= new ArrayList<String>();
-    	for (int i=0;i<this.codigoTextField.length;i++) 
-    		codigos.add(this.codigoTextField[i].getText());
-    	return codigos;
-    }
-    
-    /**
-     * Funcion que devuelve un arrayList de Double que devuelve las probabilidades ingresadas.(Vinculado con getCodigo)
-     */
-    @Override
-    public ArrayList<Double> getProbabilidades(){
-    	ArrayList<Double> probabilidades= new ArrayList<Double>();
-    	for (int i=0;i<this.probabilidadTextField.length;i++) 
-    		probabilidades.add(this.numero(this.probabilidadTextField[i].getText()));
-    	return probabilidades;
-    }
-    
+     
 
     /**
      * Esta funcion devuelve la direccion del archivo.
@@ -418,20 +363,11 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
             }
             this.resultadoBoton.setEnabled(condicion);
         }
-        else if (this.probabilidadTextField!=null && this.codigoTextField!=null) {
-        	condicion=true;
-        	for (int i=0;i<this.codigoTextField.length && condicion;i++)
-        		condicion= this.codigoTextField[i].getText()!=null && !this.codigoTextField[i].getText().equalsIgnoreCase("")
-        		 && this.probabilidadTextField[i].getText()!=null && !this.probabilidadTextField[i].getText().equalsIgnoreCase("");
-        	this.resultadoBoton.setEnabled(condicion);
-        }
 
 
     }
     @Override
     public void keyTyped(KeyEvent arg0) {}
-
-
 
 
 }
