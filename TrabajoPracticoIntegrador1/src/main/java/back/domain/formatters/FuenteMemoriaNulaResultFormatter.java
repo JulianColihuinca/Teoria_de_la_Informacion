@@ -22,7 +22,7 @@ public class FuenteMemoriaNulaResultFormatter {
         int i=0;
         String infoIndividual = "I(Si)";
         for (Double x: informacionesIndividuales) {
-            infoIndividual += "\nI(S"+ ++i +") = "+x;
+            infoIndividual += "\nI(S"+ ++i +") = "+String.format("%1.7f", x) + " binits";
         }
         return infoIndividual + "\n\n";
     }
@@ -31,12 +31,12 @@ public class FuenteMemoriaNulaResultFormatter {
         int i=0;
         String infoEntropia = "H(Si)";
         for (Double x: entropiaIndividual) {
-            infoEntropia += "\nH(S"+ ++i +") = "+x;
+            infoEntropia += "\nH(S"+ ++i +") = "+String.format("%1.7f", x) + " binits/simbolo";
         }
         return infoEntropia + "\n";
     }
 
     private String getInfoEntropia(double entropia) {
-        return "\nH(S) = "+ entropia + "\n\n";
+        return "\nH(S) = "+ entropia + " binits/simbolo \n\n";
     }
 }

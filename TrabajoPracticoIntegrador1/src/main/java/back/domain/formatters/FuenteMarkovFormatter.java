@@ -44,6 +44,6 @@ public class FuenteMarkovFormatter {
 
     private String getInfoEntropia(double entropia) {
         DecimalFormat formato = new DecimalFormat("#0.000000");
-        return "\nEntropia H(S) = " + formato.format(entropia);
+        return "\nEntropia H(S) = " + formato.format(entropia) + " binits/simbolo";
     }
 }
