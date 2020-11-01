@@ -13,10 +13,10 @@ public class CalculadoraVectorEstacionario {
         for (int i = 0; i < cantidadIteraciones; i++)
             multiplicarMatrices(matAux, matrizProbabilidades, cantFilas);
 
-        int i = 0;
+        int j = 0;
 
-        for (int j = 0; j < cantFilas; j++)
-            vectorEstacionario[j] = matAux[i][j];
+        for (int i = 0; i < cantFilas; i++)
+            vectorEstacionario[i] = matAux[i][j];
 
         return vectorEstacionario;
     }

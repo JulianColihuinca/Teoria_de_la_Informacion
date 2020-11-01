@@ -34,6 +34,6 @@ public class GetCodigosInstantaneos implements Actionable{
         double longitudMedia = calculadoraLongitud.invoke(longitudesIndividuales, probabilidades);
         String kraft = calculadoraPropiedades.invoke(longitudesIndividuales);
         String compacto = calculadoraPropiedades.invoke(infosIndividuales, longitudesIndividuales);
-        return formatter.format(probabilidades,infosIndividuales,entropiasIndividuales,entropia,longitudesIndividuales,longitudMedia,kraft,compacto);
+        return formatter.format(codigos,probabilidades,infosIndividuales,entropiasIndividuales,entropia,longitudesIndividuales,longitudMedia,kraft,compacto);
     }
 }
