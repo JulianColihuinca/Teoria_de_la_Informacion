@@ -2,28 +2,35 @@ package back.domain.calculadoras;
 
 import java.util.ArrayList;
 
-public class CalculadoraDeSimulacionFuenteNula {
+public class CalculadoraDeSimulacionFuenteMarkov {
 
 	// Genera la secuencia de caracteres con las probabilidades administradas por la
 	// cátedra
-	public String invoke(ArrayList<Double> probabilidades, int cantidad) {
-		int cantidadDeProbabilidades = probabilidades.size();
-		char simbolo;
-		;
+	public String invoke(double[][] probabilidades, int cantidad) {
 		String secuencia = "";
+		int cantidadDeProbabilidades = probabilidades.length;
+		int filaActual = (int) (Math.random() * cantidadDeProbabilidades);
 		double random, acumulador;
 		int posicion;
-		for (int i = 0; i < cantidad; i++) {
+
+		// Primer simbolo
+		char simbolo = 'A';
+		simbolo += filaActual;
+
+		// Demas simbolos
+		for (int i = 0; i < cantidad - 1; i++) {
 			posicion = 0;
-			acumulador = probabilidades.get(0);
 			random = Math.random();
-			simbolo = 'a';
+			acumulador = probabilidades[posicion][filaActual];
+
+			simbolo = 'A';
 			while (posicion < cantidadDeProbabilidades && acumulador < random) {
 				posicion++;
-				acumulador += probabilidades.get(posicion);
+				acumulador += probabilidades[posicion][filaActual];
 			}
 			simbolo += posicion;
 			secuencia += simbolo;
+			filaActual = posicion;
 		}
 		return secuencia;
 	}
@@ -31,18 +38,13 @@ public class CalculadoraDeSimulacionFuenteNula {
 	// Método encargado de contar las apariciones de cada simbolo en la simulación
 	public ArrayList<Integer> invoke(String simulacion, int cantidadSimbolos) {
 		ArrayList<Integer> cantidades = new ArrayList<Integer>();
-		char aux = 'a';
-		int[] apariciones = new int[cantidadSimbolos];
-		
-		for (int i = 0; i < cantidadSimbolos; i++)
-			apariciones[i] = 0;
-
-		for (int i = 0; i < simulacion.length(); i++) {
-			apariciones[simulacion.charAt(i) - aux] += 1;
-		}
+		char aux = 'A';
 
 		for (int i = 0; i < cantidadSimbolos; i++)
-			cantidades.add(apariciones[i]);
+			cantidades.add(0);
+
+		for (int i = 0; i < simulacion.length(); i++)
+			cantidades.set(simulacion.charAt(i) - aux, cantidades.get(simulacion.charAt(i) - aux) + 1);
 
 		return cantidades;
 	}
@@ -51,14 +53,15 @@ public class CalculadoraDeSimulacionFuenteNula {
 	// de acuerdo a su cantidad de apariciones en la simulación
 	public ArrayList<Double> invoke(ArrayList<Integer> cantidades) {
 		ArrayList<Double> probabilidades = new ArrayList<Double>();
-		
-		double total = 0 ;
-		for (int i=0; i<cantidades.size(); i++)
-			total+=cantidades.get(i);
-		
-		for (int i=0; i<cantidades.size(); i++) 
-			probabilidades.add(cantidades.get(i)/total);
-		
+
+		double total = 0;
+		for (int i = 0; i < cantidades.size(); i++)
+			total += cantidades.get(i);
+
+		for (int i = 0; i < cantidades.size(); i++)
+			probabilidades.add(cantidades.get(i) / total);
+
 		return probabilidades;
 	}
+
 }
