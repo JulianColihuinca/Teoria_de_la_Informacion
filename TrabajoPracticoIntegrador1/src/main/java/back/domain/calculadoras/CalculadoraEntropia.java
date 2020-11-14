@@ -29,12 +29,12 @@ public class CalculadoraEntropia {
         int cantFilas = matrizProbabilidades.length;
         double acumulador;
         double[] vectorPrimeraSumatoria = new double[cantFilas];
-        for (int k = 0; k < cantFilas; k++) { // me muevo por el vector y filas de las matrices
+        for (int j = 0; j < cantFilas; j++) { // me muevo por el vector y filas de las matrices
             acumulador = 0;
-            for (int j = 0; j < cantFilas; j++) {// me muevo por columnas de las matrices
+            for (int k = 0; k < cantFilas; k++) {// me muevo por columnas de las matrices
                 acumulador += matrizProbabilidades[k][j] * matrizInformacion[k][j];
             }
-            vectorPrimeraSumatoria[k] = acumulador;
+            vectorPrimeraSumatoria[j] = acumulador;
         }
         return vectorPrimeraSumatoria;
     }
