@@ -6,7 +6,6 @@ import front.views.IVentana;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class Controlador implements ActionListener {
 

@@ -1,11 +1,12 @@
 package back.domain.calculadoras;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CalculadoraDeSimulacionFuenteMarkov {
 
 	// Genera la secuencia de caracteres con las probabilidades administradas por la
-	// cátedra
+	// cï¿½tedra
 	public String invoke(double[][] probabilidades, int cantidad) {
 		String secuencia = "";
 		int cantidadDeProbabilidades = probabilidades.length;
@@ -35,7 +36,7 @@ public class CalculadoraDeSimulacionFuenteMarkov {
 		return secuencia;
 	}
 
-	// Método encargado de contar las apariciones de cada simbolo en la simulación
+	// Mï¿½todo encargado de contar las apariciones de cada simbolo en la simulaciï¿½n
 	public ArrayList<Integer> invoke(String simulacion, int cantidadSimbolos) {
 		ArrayList<Integer> cantidades = new ArrayList<Integer>();
 		char aux = 'A';
@@ -49,19 +50,32 @@ public class CalculadoraDeSimulacionFuenteMarkov {
 		return cantidades;
 	}
 
-	// Método encargado de calcular las probabilidades de aparición de cada simbolo
-	// de acuerdo a su cantidad de apariciones en la simulación
-	public ArrayList<Double> invoke(ArrayList<Integer> cantidades) {
-		ArrayList<Double> probabilidades = new ArrayList<Double>();
+	public double[][] getProbabilidadesSimuladas(String simulacion, int cantSimbolos) {
+		char[] chars = simulacion.toCharArray();
+		double[][] auxMatrizProbabilidades = new double[cantSimbolos][cantSimbolos];
+		int asciiValueForFirstChar = 65;
 
-		double total = 0;
-		for (int i = 0; i < cantidades.size(); i++)
-			total += cantidades.get(i);
-
-		for (int i = 0; i < cantidades.size(); i++)
-			probabilidades.add(cantidades.get(i) / total);
-
-		return probabilidades;
+		if (chars.length != 0) {
+			char previousChar = chars[0];
+			for (int i = 0; i < chars.length; i++) {
+				int previousIndex = previousChar - asciiValueForFirstChar;
+				int currentIndex = chars[i] - asciiValueForFirstChar;
+				auxMatrizProbabilidades[previousIndex][currentIndex] += 1;
+				previousChar = chars[i];
+			}
+		}
+		
+		return divideMatrixFor(simulacion.length(), auxMatrizProbabilidades);
 	}
 
+	private double[][] divideMatrixFor(int divisor, double[][] matrix) {
+		double[][] result = matrix;
+
+		for (int i = 0; i < matrix.length ; i++) {
+			for (int j = 0; j < matrix.length ; j++) {
+				result[i][j] /= divisor;
+			}
+		}
+		return result;
+	}
 }

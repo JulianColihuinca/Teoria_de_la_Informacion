@@ -5,9 +5,15 @@ import java.util.ArrayList;
 
 public class FuenteMarkovFormatter {
     public String format(double[][] matrizProbabilidades, double[][] matrizInformacion,
-                         double[] vectorEstacionario, double entropia,String simulacion,ArrayList<Integer> aparicionesSimulacion) {
-        return getInfoSimulacion(simulacion,aparicionesSimulacion) + getInfoMatrizDeTransicionDeEstados(matrizProbabilidades) + getInfoMatrizDeInformacion(matrizInformacion) +
-                getInfoVectorEstacionario(vectorEstacionario) + getInfoEntropia(entropia);
+                         double[] vectorEstacionario, double entropia,
+                         String simulacion, ArrayList<Integer> aparicionesSimulacion,
+                         double[][] probabilidadesSimuladas) {
+        return getInfoSimulacion(simulacion,aparicionesSimulacion)
+                + getInfoMatrizDeTransicionDeEstados(matrizProbabilidades)
+                + getInfoMatrizDeTransicionDeEstados(probabilidadesSimuladas)
+                + getInfoMatrizDeInformacion(matrizInformacion)
+                + getInfoVectorEstacionario(vectorEstacionario)
+                + getInfoEntropia(entropia);
     }
 
     private String getInfoSimulacion(String simulacion, ArrayList<Integer> aparicionesSimulacion) {
@@ -18,7 +24,7 @@ public class FuenteMarkovFormatter {
 			infoSimulacion += "   " + simbolo++ + "           | " + aparicionesSimulacion.get(i) + "\n";
 		return infoSimulacion + "\n";
 	}
-    
+
     private String getInfoMatrizDeTransicionDeEstados(double[][] matrizProbabilidades) {
         DecimalFormat formato = new DecimalFormat("#0.000000");
         String matrizTransEstados = "Matriz de transicion de estados con datos ingresados\n";
