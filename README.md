@@ -10,7 +10,9 @@
     <ol>
       <li> En el caso de Intellij, en el Menu bar indicado en la parte superior de la aplicacion, clickear en la tab <em>Build</em>. Una vez abierta la solapa, clickear <em>Rebuild project</em>. Correr el proyecto.
       <li> En el caso de Eclipse, clickear en la tab <em>Project</em> y, una vez que se abra la solapa, clickear en la opcion <em>Clean</em>. Correr el proyecto</li>
-      <li> </li>
     </ol>
   </li>
 </ol>
+
+
+<p> Si los inconvenientes persisten luego de realizar los pasos indicados, se puede ejecutar la aplicacion desde el .jar contenido en la carpeta <b>Ejecutables</b> que se encuentra en la carpeta descargada al realizar el <em>Clone</em>. </p>
