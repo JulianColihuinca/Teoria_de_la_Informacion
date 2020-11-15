@@ -16,9 +16,10 @@ public class CalculadoraDeSimulacionFuenteMarkov {
 		// Primer simbolo
 		char simbolo = 'A';
 		simbolo += filaActual;
+		secuencia +=simbolo;
 
 		// Demas simbolos
-		for (int i = 0; i < cantidad - 1; i++) {
+		for (int i = 0; i < cantidad; i++) {
 			posicion = 0;
 			random = Math.random();
 			acumulador = probabilidades[posicion][filaActual];
@@ -43,25 +44,84 @@ public class CalculadoraDeSimulacionFuenteMarkov {
 		for (int i = 0; i < cantidadSimbolos; i++)
 			cantidades.add(0);
 
-		for (int i = 0; i < simulacion.length(); i++)
+		for (int i = 1; i < simulacion.length(); i++)
 			cantidades.set(simulacion.charAt(i) - aux, cantidades.get(simulacion.charAt(i) - aux) + 1);
 
 		return cantidades;
 	}
-
-	// Método encargado de calcular las probabilidades de aparición de cada simbolo
-	// de acuerdo a su cantidad de apariciones en la simulación
-	public ArrayList<Double> invoke(ArrayList<Integer> cantidades) {
-		ArrayList<Double> probabilidades = new ArrayList<Double>();
-
-		double total = 0;
-		for (int i = 0; i < cantidades.size(); i++)
-			total += cantidades.get(i);
-
-		for (int i = 0; i < cantidades.size(); i++)
-			probabilidades.add(cantidades.get(i) / total);
-
-		return probabilidades;
+	
+	public double[][] matrizApariciones(String simulacion, int cantidadSimbolos){
+		double[][] matriz = new double[cantidadSimbolos][cantidadSimbolos];
+		
+		
+		for (int i=0; i<cantidadSimbolos; i++) {
+		
+			for (int j=0; j<cantidadSimbolos; j++)
+				matriz[i][j]=0;
+		}		
+		
+		int columnaActual = simulacion.charAt(0) - 'A';
+		int filaActual;
+		for (int i=1; i<simulacion.length(); i++) {
+			filaActual = simulacion.charAt(i)-'A';
+			
+			matriz[filaActual][columnaActual] += 1;
+			columnaActual = simulacion.charAt(i) - 'A';
+		}
+		
+		return matriz;
 	}
+	
+	public double[][] matrizTransicion(double[][] matrizApariciones) {
+		int cantidadSimbolos = matrizApariciones.length;
+		double[] total = new double[cantidadSimbolos];
+		double[][] matAux = new double[cantidadSimbolos][cantidadSimbolos];
+		
+		for (int i=0; i<cantidadSimbolos; i++) 
+			for (int j=0; j<cantidadSimbolos; j++)
+				matAux[i][j]=matrizApariciones[i][j];
+		
+		for (int i=0; i<cantidadSimbolos; i++) 
+			total[i] = 0;
+		
+		for (int i=0; i<cantidadSimbolos; i++) {
+			for (int j=0; j<cantidadSimbolos; j++) {
+				total[j]+=matrizApariciones[i][j];
+			}
+		}
+		
+		for (int i=0; i<cantidadSimbolos; i++)
+			for (int j=0; j<cantidadSimbolos; j++)
+				matAux[i][j]/=total[j];
 
+		return matAux;
+	}
+/*
+	// Método encargado de calcular la matriz de transicion de la simulacion realizada
+	public double[][] matrizTransicion(String simulacion, int cantidadSimbolos) {
+		double[][] matriz = new double[cantidadSimbolos][cantidadSimbolos];
+		double[] total = new double[cantidadSimbolos];
+		
+		for (int i=0; i<cantidadSimbolos; i++) {
+			total[i] = 0;
+			for (int j=0; j<cantidadSimbolos; j++)
+				matriz[i][j]=0;
+		}		
+		
+		int columnaActual = simulacion.charAt(0) - 'A';
+		int filaActual;
+		for (int i=1; i<simulacion.length(); i++) {
+			filaActual = simulacion.charAt(i)-'A';
+			total[filaActual] +=1;
+			matriz[filaActual][columnaActual] += 1;
+			columnaActual = simulacion.charAt(i) - 'A';
+		}
+		
+		for (int i=0; i<cantidadSimbolos; i++)
+			for (int j=0; j<cantidadSimbolos; j++)
+				matriz[i][j]/=total[j];
+
+		return matriz;
+	}
+*/
 }

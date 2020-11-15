@@ -26,13 +26,18 @@ public class GetEntropiaFuenteMarkov implements Actionable {
 		String simulacion = calculadoraSimulacion.invoke(matrizProbabilidades, 1000);
 		ArrayList<Integer> aparicionesSimulacion = calculadoraSimulacion.invoke(simulacion,
 				matrizProbabilidades.length);
-		//NO VAN 
-		//ArrayList<Double> probabilidadesSimuladas = calculadoraSimulacion.invoke(aparicionesSimulacion);
+		double[][] matrizApariciones = calculadoraSimulacion.matrizApariciones(simulacion, matrizProbabilidades.length);
+		double[][] matrizTransicionSimulada = calculadoraSimulacion.matrizTransicion(matrizApariciones);
 		double[][] matrizInformacion = calculadoraMatrizInformacion.invoke(matrizProbabilidades);
+		double[][] matrizInformacionSimulada = calculadoraMatrizInformacion.invoke(matrizTransicionSimulada);
 		double[] vectorEstacionario = calculadoraVectorEstacionario.invoke(matrizProbabilidades);
+		double[] vectorEstacionarioSimulado = calculadoraVectorEstacionario.invoke(matrizTransicionSimulada);
 		double entropia = calculadoraEntropia.calculaEntropia(matrizProbabilidades, matrizInformacion,
 				vectorEstacionario);
+		double entropiaSimulada = calculadoraEntropia.calculaEntropia(matrizTransicionSimulada,
+				matrizInformacionSimulada, vectorEstacionarioSimulado);
 		return formatter.format(matrizProbabilidades, matrizInformacion, vectorEstacionario, entropia, simulacion,
-				aparicionesSimulacion);
+				aparicionesSimulacion, matrizTransicionSimulada, matrizInformacionSimulada, vectorEstacionarioSimulado,
+				entropiaSimulada,matrizApariciones);
 	}
 }
