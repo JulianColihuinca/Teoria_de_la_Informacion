@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class GetEntropiaFuenteMemoriaNula implements Actionable {
 	private final ArrayList<Double> probabilidades;
+	private final int cantidadDeIteraciones;
 	private final CalculadoraCantInformacion calculadoraCantInformacion = new CalculadoraCantInformacion();
 	private final CalculadoraEntropia calculadoraEntropia = new CalculadoraEntropia();
 	private final FuenteMemoriaNulaResultFormatter formatter = new FuenteMemoriaNulaResultFormatter();
@@ -17,11 +18,12 @@ public class GetEntropiaFuenteMemoriaNula implements Actionable {
 
 	public GetEntropiaFuenteMemoriaNula(ArrayList<Double> probabilidades) {
 		this.probabilidades = probabilidades;
+		this.cantidadDeIteraciones=1000;
 	}
 
 	@Override
 	public String execute() {
-		String simulacion = calculadoraSimulacion.invoke(probabilidades, 1000);
+		String simulacion = calculadoraSimulacion.invoke(probabilidades, this.cantidadDeIteraciones);
 		ArrayList<Integer> aparicionesSimulacion = calculadoraSimulacion.invoke(simulacion, probabilidades.size());
 		ArrayList<Double> probabilidadesSimuladas = calculadoraSimulacion.invoke(aparicionesSimulacion);
 		ArrayList<Double> infosIndividuales = calculadoraCantInformacion.invoke(probabilidades);

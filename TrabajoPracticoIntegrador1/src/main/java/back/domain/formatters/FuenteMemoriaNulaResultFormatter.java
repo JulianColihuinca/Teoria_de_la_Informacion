@@ -30,8 +30,8 @@ public class FuenteMemoriaNulaResultFormatter {
 		String infoProbabilidades = "Simbolos y probabilidades: \nSimbolo | Probabilidad Ingresada | Probabilidad Simulada";
 		char simbolo = 'a';
 		for (int i = 0; i < probabilidades.size(); i++) {
-			infoProbabilidades += "\n   " + simbolo++ + "           | " + probabilidades.get(i) + "\t\t    | "
-					+ probabilidadesSimuladas.get(i);
+			infoProbabilidades += "\n   " + simbolo++ + "           | " + String.format("%1.5f", probabilidades.get(i)) + "\t    | "
+					+ String.format("%1.5f",probabilidadesSimuladas.get(i));
 		}
 		return infoProbabilidades + "\n\n";
 	}

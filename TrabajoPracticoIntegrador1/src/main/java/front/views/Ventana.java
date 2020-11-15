@@ -135,7 +135,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         JPanel panel_9 = new JPanel();
         panel_4.add(panel_9);
 
-        JLabel lblNewLabel = new JLabel("Fuentes:");
+        JLabel lblNewLabel = new JLabel("Simbolos:");
         panel_9.add(lblNewLabel);
 
         fuentesTextField = new JTextField();

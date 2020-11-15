@@ -33,7 +33,7 @@ public class CalculadoraDeSimulacionFuenteNula {
 		ArrayList<Integer> cantidades = new ArrayList<Integer>();
 		char aux = 'a';
 		int[] apariciones = new int[cantidadSimbolos];
-
+		
 		for (int i = 0; i < cantidadSimbolos; i++)
 			apariciones[i] = 0;
 
