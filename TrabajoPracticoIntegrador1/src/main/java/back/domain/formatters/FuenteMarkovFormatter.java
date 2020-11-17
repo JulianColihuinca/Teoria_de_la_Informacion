@@ -7,28 +7,31 @@ public class FuenteMarkovFormatter {
 	public String format(double[][] matrizProbabilidades, double[][] matrizInformacion, double[] vectorEstacionario,
 			double entropia, String simulacion, ArrayList<Integer> aparicionesSimulacion,
 			double[][] matrizTransicionSimulada, double[][] matrizInformacionSimulada,
-			double[] vectorEstacionarioSimulado, double entropiaSimulada, double[][] matrizApariciones) {
-		return getInfoSimulacion(simulacion, aparicionesSimulacion,matrizApariciones)
+			double[] vectorEstacionarioSimulado, double entropiaSimulada, double[][] matrizApariciones,
+			int cantidadDeIteraciones) {
+		return getInfoSimulacion(simulacion, aparicionesSimulacion, matrizApariciones,cantidadDeIteraciones)
 				+ getInfoMatrizDeTransicionDeEstados(matrizProbabilidades, matrizTransicionSimulada)
 				+ getInfoMatrizDeInformacion(matrizInformacion, matrizInformacionSimulada)
-				+ getInfoVectorEstacionario(vectorEstacionario,vectorEstacionarioSimulado) + getInfoEntropia(entropia,entropiaSimulada);
+				+ getInfoVectorEstacionario(vectorEstacionario, vectorEstacionarioSimulado)
+				+ getInfoEntropia(entropia, entropiaSimulada);
 	}
 
-	private String getInfoSimulacion(String simulacion, ArrayList<Integer> aparicionesSimulacion, double[][] matrizApariciones) {
+	private String getInfoSimulacion(String simulacion, ArrayList<Integer> aparicionesSimulacion,
+			double[][] matrizApariciones,int iteraciones) {
 		char simbolo = 'A';
 		DecimalFormat formato = new DecimalFormat("#0000");
-		String infoSimulacion = "Simulacion realizada para un N=1000 con las probabilidades ingresadas:\n" + simulacion
-				+ "\nAclaracion: Se generan 1001 simbolos, siendo el primero generado aleatoriamente, pero no contado, para comenzar los calculos de una matriz de transicion\n\n";
+		String infoSimulacion = "Simulacion realizada para un N="+iteraciones+" con las probabilidades ingresadas:\n" + simulacion
+				+ "\nAclaracion: Se generan "+(iteraciones+1)+" simbolos, siendo el primero generado aleatoriamente, pero no contado, para comenzar los calculos de una matriz de transicion\n\n";
 		infoSimulacion += "Simbolo | Apariciones en la simulacion\n";
 		for (int i = 0; i < aparicionesSimulacion.size(); i++)
 			infoSimulacion += "   " + simbolo++ + "           | " + aparicionesSimulacion.get(i) + "\n";
 		infoSimulacion += "\nMatriz de apariciones en la simulacion\n";
-		for (int i=0; i<matrizApariciones.length; i++) {
+		for (int i = 0; i < matrizApariciones.length; i++) {
 			infoSimulacion += " | ";
-			for (int j=0; j<matrizApariciones.length; j++) {
-				infoSimulacion+= formato.format(matrizApariciones[i][j])+" | ";
+			for (int j = 0; j < matrizApariciones.length; j++) {
+				infoSimulacion += formato.format(matrizApariciones[i][j]) + " | ";
 			}
-			infoSimulacion+="\n";
+			infoSimulacion += "\n";
 		}
 		return infoSimulacion + "\n";
 	}
@@ -93,8 +96,10 @@ public class FuenteMarkovFormatter {
 
 	private String getInfoEntropia(double entropia, double entropiaSimulada) {
 		DecimalFormat formato = new DecimalFormat("#0.000000");
-		String infoEntropia = "Entropia calculada con datos ingresados H(S) = " + formato.format(entropia) + " [binits/simbolo]\n";
-		infoEntropia += "Entropia calculada con datos simulados H(S) = " + formato.format(entropiaSimulada) + " [binits/simbolo]\n";
+		String infoEntropia = "Entropia calculada con datos ingresados H(S) = " + formato.format(entropia)
+				+ " [binits/simbolo]\n";
+		infoEntropia += "Entropia calculada con datos simulados H(S) = " + formato.format(entropiaSimulada)
+				+ " [binits/simbolo]\n";
 		return infoEntropia;
 	}
 }

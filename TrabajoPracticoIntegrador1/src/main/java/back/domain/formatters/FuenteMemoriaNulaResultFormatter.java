@@ -8,18 +8,18 @@ public class FuenteMemoriaNulaResultFormatter {
 			ArrayList<Double> entropiaIndividual, double entropia, String simulacion,
 			ArrayList<Double> probabilidadesSimuladas, ArrayList<Integer> aparicionesSimulacion,
 			ArrayList<Double> infosSimuladas, ArrayList<Double> entropiasIndividualesSimuladas,
-			double entropiaSimulada) {
+			double entropiaSimulada, int cantidadDeIteraciones) {
 
-		return getInfoSimulacion(simulacion, aparicionesSimulacion)
+		return getInfoSimulacion(simulacion, aparicionesSimulacion,cantidadDeIteraciones)
 				+ getInfoProbabilidades(probabilidades, probabilidadesSimuladas)
 				+ getInformacionIndividual(infoIndividual, infosSimuladas)
 				+ getInfoEntropiaIndividual(entropiaIndividual, entropiasIndividualesSimuladas)
 				+ getInfoEntropia(entropia, entropiaSimulada);
 	}
 
-	private String getInfoSimulacion(String simulacion, ArrayList<Integer> aparicionesSimulacion) {
+	private String getInfoSimulacion(String simulacion, ArrayList<Integer> aparicionesSimulacion,int iteraciones) {
 		char simbolo = 'a';
-		String infoSimulacion = "Simulacion realizada para un N=1000 con las probabilidades ingresadas:\n" + simulacion + "\n\n";
+		String infoSimulacion = "Simulacion realizada para un N="+iteraciones+" con las probabilidades ingresadas:\n" + simulacion + "\n\n";
 		infoSimulacion += "Simbolo | Apariciones en la simulacion\n";
 		for (int i = 0; i < aparicionesSimulacion.size(); i++)
 			infoSimulacion += "   " + simbolo++ + "           | " + aparicionesSimulacion.get(i) + "\n";

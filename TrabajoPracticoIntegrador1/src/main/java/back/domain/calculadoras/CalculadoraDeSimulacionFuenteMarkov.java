@@ -96,32 +96,4 @@ public class CalculadoraDeSimulacionFuenteMarkov {
 
 		return matAux;
 	}
-/*
-	// Método encargado de calcular la matriz de transicion de la simulacion realizada
-	public double[][] matrizTransicion(String simulacion, int cantidadSimbolos) {
-		double[][] matriz = new double[cantidadSimbolos][cantidadSimbolos];
-		double[] total = new double[cantidadSimbolos];
-		
-		for (int i=0; i<cantidadSimbolos; i++) {
-			total[i] = 0;
-			for (int j=0; j<cantidadSimbolos; j++)
-				matriz[i][j]=0;
-		}		
-		
-		int columnaActual = simulacion.charAt(0) - 'A';
-		int filaActual;
-		for (int i=1; i<simulacion.length(); i++) {
-			filaActual = simulacion.charAt(i)-'A';
-			total[filaActual] +=1;
-			matriz[filaActual][columnaActual] += 1;
-			columnaActual = simulacion.charAt(i) - 'A';
-		}
-		
-		for (int i=0; i<cantidadSimbolos; i++)
-			for (int j=0; j<cantidadSimbolos; j++)
-				matriz[i][j]/=total[j];
-
-		return matriz;
-	}
-*/
 }

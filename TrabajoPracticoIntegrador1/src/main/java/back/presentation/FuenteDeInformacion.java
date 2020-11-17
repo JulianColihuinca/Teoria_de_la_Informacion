@@ -13,38 +13,38 @@ import java.util.ArrayList;
 public class FuenteDeInformacion implements IFuenteDeInformacion {
 
     @Override
-    public String calcularEntropiaFuenteMemNula(String nombreArchivo) {
-        Actionable action = new GetEntropiaPorArchivoFuenteMemoriaNulaAction(nombreArchivo);
+    public String calcularEntropiaFuenteMemNula(String nombreArchivo,int cantidad) {
+        Actionable action = new GetEntropiaPorArchivoFuenteMemoriaNulaAction(nombreArchivo,cantidad);
         return action.execute();
     }
 
     @Override
-    public String calcularEntropiaFuenteMemNula(ArrayList<Double> probabilidades) {
-        Actionable action = new GetEntropiaFuenteMemoriaNula(probabilidades);
+    public String calcularEntropiaFuenteMemNula(ArrayList<Double> probabilidades,int cantidadSimulacion) {
+        Actionable action = new GetEntropiaFuenteMemoriaNula(probabilidades,cantidadSimulacion);
         return action.execute();
     }
 
     @Override
-    public String calcularMatrizEntropiaFuenteMarkov(String nombreArchivo) {
-        Actionable action = new GetEntropiaPorArchivoFuenteMarkov(nombreArchivo);
+    public String calcularMatrizEntropiaFuenteMarkov(String nombreArchivo,int cantidad) {
+        Actionable action = new GetEntropiaPorArchivoFuenteMarkov(nombreArchivo,cantidad);
         return action.execute();
     }
 
     @Override
-    public String calcularMatrizEntropiaFuenteMarkov(double[][] matrizProbabilidades) {
-        Actionable action = new GetEntropiaFuenteMarkov(matrizProbabilidades);
+    public String calcularMatrizEntropiaFuenteMarkov(double[][] matrizProbabilidades,int cantidadSimulacion) {
+        Actionable action = new GetEntropiaFuenteMarkov(matrizProbabilidades,cantidadSimulacion);
         return action.execute();
     }
     
     @Override
-    public String calcularCodigosInstantaneos(String nombreArchivo) {
-    	Actionable action = new GetCodigosInstantaneosPorArchivo(nombreArchivo);
+    public String calcularCodigosInstantaneos(String nombreArchivo,int cantidad) {
+    	Actionable action = new GetCodigosInstantaneosPorArchivo(nombreArchivo,cantidad);
     	return action.execute();
     }
     
     @Override
-    public String calcularCodigosInstantaneos(ArrayList<Double> probabilidades) {
-    	Actionable action = new GetCodigosInstantaneos(probabilidades);
+    public String calcularCodigosInstantaneos(ArrayList<Double> probabilidades, int cantidadSimulacion) {
+    	Actionable action = new GetCodigosInstantaneos(probabilidades,cantidadSimulacion);
     	return action.execute();
     }
 }
