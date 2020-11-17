@@ -15,6 +15,8 @@ public interface IVentana {
     ArrayList<Double> getArray();
 
     String getDireccion();
+    
+    int getN();
 
     void dibujaVector(int cant);
 

@@ -16,7 +16,6 @@ public class CalculadoraEntropia {
     }
 
     public double calculaEntropia(double[][] matrizProbabilidades, double[][] matrizInformacion, double[] vectorEstacionario) {
-        // Sumatoria P(j/i)*I(j/i)
         double entropia = 0;
         double[] vectorPrimeraSumatoria = calculaVectorPrimeraSumatoria(matrizProbabilidades, matrizInformacion);
         for (int i = 0; i < matrizProbabilidades.length; i++) {
@@ -29,9 +28,9 @@ public class CalculadoraEntropia {
         int cantFilas = matrizProbabilidades.length;
         double acumulador;
         double[] vectorPrimeraSumatoria = new double[cantFilas];
-        for (int j = 0; j < cantFilas; j++) { // me muevo por el vector y filas de las matrices
+        for (int j = 0; j < cantFilas; j++) { 
             acumulador = 0;
-            for (int k = 0; k < cantFilas; k++) {// me muevo por columnas de las matrices
+            for (int k = 0; k < cantFilas; k++) {
                 acumulador += matrizProbabilidades[k][j] * matrizInformacion[k][j];
             }
             vectorPrimeraSumatoria[j] = acumulador;

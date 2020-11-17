@@ -24,7 +24,7 @@ public class CalculadoraPropiedades {
 	public String invoke(ArrayList<Double> informaciones, ArrayList<Integer> longitudes) {
 		int i = 0;
 		String cadena;
-		while (i < informaciones.size() && Math.ceil(informaciones.get(i)) > longitudes.get(0))
+		while (i < informaciones.size() && Math.ceil(informaciones.get(i)) >= longitudes.get(i))
 			i++;
 		if (i < informaciones.size())
 			cadena = "La longitud del codigo " + (i + 1)

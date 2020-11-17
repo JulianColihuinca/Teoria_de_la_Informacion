@@ -16,9 +16,9 @@ public class GetEntropiaFuenteMemoriaNula implements Actionable {
 	private final FuenteMemoriaNulaResultFormatter formatter = new FuenteMemoriaNulaResultFormatter();
 	private final CalculadoraDeSimulacionFuenteNula calculadoraSimulacion = new CalculadoraDeSimulacionFuenteNula();
 
-	public GetEntropiaFuenteMemoriaNula(ArrayList<Double> probabilidades) {
+	public GetEntropiaFuenteMemoriaNula(ArrayList<Double> probabilidades,int cantidad) {
 		this.probabilidades = probabilidades;
-		this.cantidadDeIteraciones=1000;
+		this.cantidadDeIteraciones=cantidad;
 	}
 
 	@Override
@@ -36,6 +36,6 @@ public class GetEntropiaFuenteMemoriaNula implements Actionable {
 		double entropiaSimulada = calculadoraEntropia.calculaEntropia(entropiasIndividualesSimuladas);
 		return formatter.format(probabilidades, infosIndividuales, entropiasIndividuales, entropia, simulacion,
 				probabilidadesSimuladas, aparicionesSimulacion, infosIndividualesSimuladas,
-				entropiasIndividualesSimuladas, entropiaSimulada);
+				entropiasIndividualesSimuladas, entropiaSimulada,this.cantidadDeIteraciones);
 	}
 }

@@ -9,9 +9,10 @@ public class CodigosInstantaneosFormatter {
 			double longitudMedia, String kraft, String compacto, String simulacionSimbolos, String simulacionCodigos,
 			ArrayList<Integer> aparicionesSimulacion, ArrayList<Double> probabilidadesSimuladas,
 			ArrayList<Double> infosIndividualesSimuladas, ArrayList<Double> entropiasIndividualesSimuladas,
-			double entropiaSimulada, double longitudMediaSimulada, String compactoSimulado) {
+			double entropiaSimulada, double longitudMediaSimulada, String compactoSimulado, int cantidadDeIteraciones) {
 		return getInfoProbabilidadesYCodigos(probabilidades, codigos)
-				+ getInfoSimulacion(simulacionSimbolos, simulacionCodigos, aparicionesSimulacion, codigos)
+				+ getInfoSimulacion(simulacionSimbolos, simulacionCodigos, aparicionesSimulacion, codigos,
+						cantidadDeIteraciones)
 				+ getInfoCodigoBloqueSimulado(probabilidadesSimuladas, codigos)
 				+ getInformacionIndividual(infoIndividual, infosIndividualesSimuladas)
 				+ getInfoEntropiaIndividual(entropiaIndividual, entropiasIndividualesSimuladas)
@@ -31,8 +32,8 @@ public class CodigosInstantaneosFormatter {
 	}
 
 	private String getInfoSimulacion(String simulacionSimbolos, String simulacionCodigos,
-			ArrayList<Integer> apariciones, ArrayList<String> codigos) {
-		String infoSimulacion = "Codigo generado por una simulacion de N=1000 apariciones:\n";
+			ArrayList<Integer> apariciones, ArrayList<String> codigos, int iteraciones) {
+		String infoSimulacion = "Codigo generado por una simulacion de N=" + iteraciones + " apariciones:\n";
 		infoSimulacion += "Expresado en simbolos: " + simulacionSimbolos + "\n";
 		infoSimulacion += "Expresado en codigo: " + simulacionCodigos + "\n\n";
 		infoSimulacion += "Codigo -> Cantidad de apariciones en la simulacion\n";
@@ -111,7 +112,8 @@ public class CodigosInstantaneosFormatter {
 	}
 
 	private String getInfoCompacto(String compacto, String compactoSimulado) {
-		return "\nCompacticidad para datos ingresados: " + compacto + "\nCompacticidad para datos simulados: "+compactoSimulado;
+		return "\nCompacticidad para datos ingresados: " + compacto + "\nCompacticidad para datos simulados: "
+				+ compactoSimulado;
 	}
 
 }

@@ -11,19 +11,21 @@ import back.domain.formatters.FuenteMarkovFormatter;
 
 public class GetEntropiaFuenteMarkov implements Actionable {
 	private double[][] matrizProbabilidades;
+	private final int cantidadDeIteraciones;
 	private final CalculadoraMatrizInformacion calculadoraMatrizInformacion = new CalculadoraMatrizInformacion();
 	private final CalculadoraVectorEstacionario calculadoraVectorEstacionario = new CalculadoraVectorEstacionario();
 	private final CalculadoraEntropia calculadoraEntropia = new CalculadoraEntropia();
 	private final FuenteMarkovFormatter formatter = new FuenteMarkovFormatter();
 	private final CalculadoraDeSimulacionFuenteMarkov calculadoraSimulacion = new CalculadoraDeSimulacionFuenteMarkov();
 
-	public GetEntropiaFuenteMarkov(double[][] matrizProbabilidades) {
+	public GetEntropiaFuenteMarkov(double[][] matrizProbabilidades,int cantidad) {
 		this.matrizProbabilidades = matrizProbabilidades;
+		this.cantidadDeIteraciones=cantidad;
 	}
 
 	@Override
 	public String execute() {
-		String simulacion = calculadoraSimulacion.invoke(matrizProbabilidades, 1000);
+		String simulacion = calculadoraSimulacion.invoke(matrizProbabilidades, this.cantidadDeIteraciones);
 		ArrayList<Integer> aparicionesSimulacion = calculadoraSimulacion.invoke(simulacion,
 				matrizProbabilidades.length);
 		double[][] matrizApariciones = calculadoraSimulacion.matrizApariciones(simulacion, matrizProbabilidades.length);
@@ -38,6 +40,6 @@ public class GetEntropiaFuenteMarkov implements Actionable {
 				matrizInformacionSimulada, vectorEstacionarioSimulado);
 		return formatter.format(matrizProbabilidades, matrizInformacion, vectorEstacionario, entropia, simulacion,
 				aparicionesSimulacion, matrizTransicionSimulada, matrizInformacionSimulada, vectorEstacionarioSimulado,
-				entropiaSimulada,matrizApariciones);
+				entropiaSimulada,matrizApariciones,this.cantidadDeIteraciones);
 	}
 }

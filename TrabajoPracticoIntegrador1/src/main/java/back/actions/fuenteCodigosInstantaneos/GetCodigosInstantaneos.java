@@ -23,9 +23,9 @@ public class GetCodigosInstantaneos implements Actionable {
 	private final CodigosInstantaneosFormatter formatter = new CodigosInstantaneosFormatter();
 	private final CalculadoraDeSimulacionFuenteNulaConCodigos calculadoraSimulacion = new CalculadoraDeSimulacionFuenteNulaConCodigos();
 
-	public GetCodigosInstantaneos(ArrayList<Double> probabilidades) {
+	public GetCodigosInstantaneos(ArrayList<Double> probabilidades, int cantidad) {
 		this.probabilidades = probabilidades;
-		this.cantidadDeIteraciones = 1000;
+		this.cantidadDeIteraciones = cantidad;
 	}
 
 	@Override
@@ -57,6 +57,6 @@ public class GetCodigosInstantaneos implements Actionable {
 		return formatter.format(codigos, probabilidades, infosIndividuales, entropiasIndividuales, entropia,
 				longitudesIndividuales, longitudMedia, kraft, compacto, simulacionSimbolos, simulacionCodigos,
 				aparicionesSimulacion, probabilidadesSimuladas, infosIndividualesSimuladas,
-				entropiasIndividualesSimuladas, entropiaSimulada, longitudMediaSimulada,compactoSimulado);
+				entropiasIndividualesSimuladas, entropiaSimulada, longitudMediaSimulada,compactoSimulado,this.cantidadDeIteraciones);
 	}
 }

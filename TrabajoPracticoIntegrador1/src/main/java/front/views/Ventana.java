@@ -25,6 +25,7 @@ import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.SwingConstants;
 
 public class Ventana extends JFrame implements IVentana, KeyListener, MouseListener  {
 
@@ -42,6 +43,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     private JRadioButton archivoSeleccion ; // Eleccion por archivo
     private JButton confirmarButton ; // Boton para confirmar la cantidad de fuentes
     private JButton resultadoBoton ; // Boton para ver resultados con los datos.
+    private JTextField cantidadN;
 
 
     public Ventana() {
@@ -96,8 +98,27 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         JPanel panel_5 = new JPanel();
         panel_2.add(panel_5);
 
-        JLabel entradaLabel = new JLabel("Seleccione tipo de Entrada:");
+        JLabel entradaLabel = new JLabel("Seleccione tipo de Entrada");
         panel_5.add(entradaLabel);
+        
+        JPanel panel_10 = new JPanel();
+        panel_2.add(panel_10);
+        panel_10.setLayout(new GridLayout(0, 2, 0, 0));
+        
+        JLabel lblNewLabel_1 = new JLabel("Cantidad N de s\u00EDmbolos a simular: ");
+        lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+        panel_10.add(lblNewLabel_1);
+        
+        JPanel panel_11 = new JPanel();
+        FlowLayout flowLayout = (FlowLayout) panel_11.getLayout();
+        flowLayout.setAlignment(FlowLayout.LEFT);
+        flowLayout.setVgap(6);
+        panel_10.add(panel_11);
+        
+        cantidadN = new JTextField();
+        panel_11.add(cantidadN);
+        cantidadN.setEnabled(false);
+        cantidadN.setColumns(10);
 
         Panel panel_3 = new Panel();
         panelC2.add(panel_3);
@@ -164,6 +185,7 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
         this.fuenteEleccion.add("Codigo con Probabilidades");
         this.direccionTextField.addKeyListener(this);
         this.fuentesTextField.addKeyListener(this);
+        this.cantidadN.addKeyListener(this);
         this.confirmarButton.setActionCommand("INGRESO FUENTE");
         this.resultadoBoton.setActionCommand("VER RESULTADOS");
     }
@@ -268,6 +290,11 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
     public int getCantFuentes() {
         return Integer.parseInt(this.fuentesTextField.getText());
     }
+    
+    @Override
+    public int getN() {
+    	return Integer.parseInt(this.cantidadN.getText());
+    }
 
     /**
      * Esta funcion devuelve la matriz en formato double ingresada por teclado.
@@ -320,11 +347,13 @@ public class Ventana extends JFrame implements IVentana, KeyListener, MouseListe
             this.direccionTextField.setEnabled(this.archivoSeleccion.isSelected());
             this.fuentesTextField.setEnabled(this.tecladoSeleccion.isSelected());
             this.confirmarButton.setEnabled(this.tecladoSeleccion.isSelected());
+            this.cantidadN.setEnabled(this.tecladoSeleccion.isSelected());
         }
         else if (arg0.getSource()==this.tecladoSeleccion) {
             this.direccionTextField.setEnabled(this.archivoSeleccion.isSelected());
             this.fuentesTextField.setEnabled(this.tecladoSeleccion.isSelected());
             this.confirmarButton.setEnabled(this.tecladoSeleccion.isSelected());
+            this.cantidadN.setEnabled(this.tecladoSeleccion.isSelected());
         }
     }
     @Override
