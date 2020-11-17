@@ -3,6 +3,8 @@
 <h1>Instrucciones para poder compilar la aplicacion: </h1>
 <ul>
   <li>Eclipse: Una vez abierto el IDE, click derecho en el <em>Package Explorer</em>, luego seleccionar la opcion <em>Import</em>. Se desplegara una ventana, en la que se debe seleccionar <em>Maven -> Existing Maven Projects</em>. Una vez seleccionado eso, pulsar <em>Next</em>. Se abrira una nueva ventana con el titulo <em>Import Maven Projects</em>. Se debe buscar la direccion donde se tiene descargado el projecto (El que se llama Teoria_de_la_informacion). Se selecciona y se pulsa aceptar. Verificar que en el recuadro de Projects este tildado. Luego, pulsar finish. Una vez que termina de importarse el projecto, ir a TrabajoPracticoIntegrador1 -> src/main/java -> main -> Main.java. Una vez alli hacer click en el run.</li>
+  
+  <li>IntelliJ: Una vez abierto el IDE, clickear en la ventana que aparezca en la pantalla que dice que se debe importar las dependencias de Maven (clickear en el boton <em>Import</em>. Luego, dirigirse a el paquete TrabajoPracticoIntegrador1/src/main/java/main y abrir el file Main.java. Alli dentro se podra compilar el proyecto con el boton <em>Run</em></li>
 </ul>
 
 
