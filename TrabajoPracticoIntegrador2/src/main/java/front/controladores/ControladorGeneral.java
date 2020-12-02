@@ -1,5 +1,9 @@
 package front.controladores;
 
+import front.views.VistaCanales;
+import front.views.VistaCodificaciones;
+import front.views.interfaces.IVistaCanales;
+import front.views.interfaces.IVistaCodificaciones;
 import front.views.interfaces.IVistaGeneral;
 
 import java.awt.event.ActionEvent;
@@ -15,9 +19,15 @@ public class ControladorGeneral implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
         if (command.equalsIgnoreCase(IVistaGeneral.CANALES)) {
-            // TODO: Aca poner lo de canales
+        	IVistaCanales vista = new VistaCanales();
+        	ControladorCanales controlador = new ControladorCanales(vista);
+        	vista.abrir();
+        	//this.vista.cerrar();
         } else if (command.equalsIgnoreCase(IVistaGeneral.CODIFICACIONES)) {
-            // TODO: Aca poner lo de codificaciones
+        	IVistaCodificaciones vista = new VistaCodificaciones();
+        	ControladorCodificaciones controlador = new ControladorCodificaciones(vista);
+        	vista.abrir();
+        	//this.vista.cerrar();
         }
     }
 }

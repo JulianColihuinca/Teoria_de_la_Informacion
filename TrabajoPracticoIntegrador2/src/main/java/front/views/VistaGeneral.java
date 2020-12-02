@@ -16,17 +16,17 @@ public class VistaGeneral extends JFrame implements IVistaGeneral {
 
     public VistaGeneral() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBounds(100, 100, 400, 400);
+        setBounds(800, 300, 400, 200);
         this.setMinimumSize(new Dimension(300,300));
-        this.setTitle("");
+        this.setTitle("Menu");
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        contentPane.setLayout(new FlowLayout());
 
         codificacionesButton.setActionCommand(CODIFICACIONES);
         canalesButton.setActionCommand(CANALES);
+        contentPane.setLayout(new GridLayout(0, 2, 0, 0));
         contentPane.add(codificacionesButton);
         contentPane.add(canalesButton);
 
@@ -42,4 +42,9 @@ public class VistaGeneral extends JFrame implements IVistaGeneral {
         canalesButton.addActionListener(actionListener);
         this.actionListener = actionListener;
     }
+
+	@Override
+	public void cerrar() {
+		setVisible(false);
+	}
 }
