@@ -7,5 +7,6 @@ public interface IVistaGeneral {
     static final String CODIFICACIONES = "Codificaciones";
 
     public void abrir();
+    public void cerrar();
     public void setControlador(ActionListener actionListener);
 }
