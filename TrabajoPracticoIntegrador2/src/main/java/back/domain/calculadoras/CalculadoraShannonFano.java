@@ -17,13 +17,14 @@ public class CalculadoraShannonFano implements ICalculadoraShannonFano {
 		for (int i = 0; i < longitud; i++) {
 			pos = 0;
 			auxChar = cadena.charAt(i);
-			while (pos < simbolos.size() && simbolos.get(pos) != auxChar)
-				pos++;
-			if (pos == simbolos.size()) {
+			int indice = simbolos.indexOf(auxChar);
+			if (indice!=-1) {
+				frecuencias.set(indice, frecuencias.get(indice)+1);
+			}
+			else {
 				frecuencias.add(1);
 				simbolos.add(auxChar);
-			} else
-				frecuencias.set(pos, frecuencias.get(pos) + 1);
+			}
 		}
 
 		for (int i = 0; i < simbolos.size(); i++)
